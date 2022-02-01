@@ -21,11 +21,14 @@ ENV MODELS_CPT_VERSION=15.5.10
 ENV MODELS_CPT_SOURCE=${MODELS_CPT_MODEL}.${MODELS_CPT_VERSION}.tar.gz
 ENV MODELS_CPT_DIR=${MODELS_DIR}/${MODELS_CPT_MODEL}
 ENV CPT_BIN_DIR=${MODELS_CPT_DIR}/${MODELS_CPT_VERSION}/bin
-ENV SCRIPTS_DIR=/forecast/scripts
-ENV SCRIPTS_CODE=https://github.com/CIAT-DAPA/usaid_procesos_interfaz.git
+ENV SCRIPTS_VERSION=1.9
+ENV SCRIPTS_DIR=/forecast/usaid_procesos_interfaz
+ENV SCRIPTS_NAME=usaid_procesos_interfaz
+ENV SCRIPTS_CODE=https://github.com/CIAT-DAPA/usaid_procesos_interfaz/releases/download/v${SCRIPTS_VERSION}/${SCRIPTS_NAME}.zip
 ENV PATH="${MODELS_DIR}:${PATH}"
 ENV PATH="${CPT_BIN_DIR}:${PATH}"
-
+ENV N_CORES=2
+ENV DISPLAY :0
 
 # Install dependencies
 RUN apt-get update \
@@ -92,10 +95,12 @@ RUN cd ${MODELS_DIR} \
     # Scripts
     && mkdir ${SCRIPTS_DIR} \    
     && cd ${SCRIPTS_DIR} \ 
-    && git clone ${SCRIPTS_CODE} \
+    && wget ${SCRIPTS_CODE} \
+    && unzip ${SCRIPTS_NAME}.zip \
+    && rm ${SCRIPTS_NAME}.zip \
     && Rscript ${MODELS_DIR}/imports.R \
     && mv ${MODELS_DIR}/imports.R ${MODELS_TMP}/ \
-    && mv ${MODELS_DIR}/pkgs.rds ${MODELS_TMP}/ 
+    && mv ${MODELS_DIR}/pkgs.rds ${MODELS_TMP}/
 
 
 # docker build -t stevensotelo/aclimate_process:latest .
