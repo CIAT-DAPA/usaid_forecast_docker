@@ -10,8 +10,8 @@ COPY ./test /forecast/test
 ENV MODELS_DIR=/forecast/models
 ENV MODELS_TMP=/forecast/tmp
 ENV MODELS_WORKDIR=/forecast/workdir
-ENV MODELS_ORYZA_MODEL=oryza_model
-ENV MODELS_ORYZA_DIR=${MODELS_DIR}/${MODELS_ORYZA_MODEL}
+#ENV MODELS_ORYZA_MODEL=oryza_model
+#ENV MODELS_ORYZA_DIR=${MODELS_DIR}/${MODELS_ORYZA_MODEL}
 ENV MODELS_DSSAT_MODEL=dssat-csm
 ENV MODELS_DSSAT_GITHUB=dssat-csm-os
 ENV MODELS_DSSAT_GITHUB_URL=https://github.com/DSSAT/dssat-csm-os
@@ -43,8 +43,8 @@ RUN dpkg --add-architecture i386 \
         gfortran \
         git \
         wget \        
-        wine \
-        wine32 \
+#        wine \
+#        wine32 \
     && wget https://download.visualstudio.microsoft.com/download/pr/647f8505-3bf0-48c5-ac0f-3839be6816d7/d0c2762ded5a1ded3c79b1e495e43b7c/dotnet-sdk-2.2.203-linux-x64.tar.gz \
     && mkdir ~/dotnet-2.2-203 \
     && tar -xvf dotnet-sdk-2.2.203-linux-x64.tar.gz -C ~/dotnet-2.2-203 \
@@ -62,21 +62,21 @@ RUN dpkg --add-architecture i386 \
         libxml2-dev \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir ${MODELS_WORKDIR} \
-    && mkdir ${MODELS_TMP} 
-    
+    && mkdir ${MODELS_TMP}
+
 
     # Oryza
-RUN cd ${MODELS_DIR} \
-    && mkdir ${MODELS_ORYZA_MODEL} \
+#RUN cd ${MODELS_DIR} \
+    #&& mkdir ${MODELS_ORYZA_MODEL} \
     #&& unzip ./ORYZAv3_lin.zip \
-    && unzip ./ORYZAv3_win.zip \
+    #&& unzip ./ORYZAv3_win.zip \
     #&& mv ./Linux ./${MODELS_ORYZA_MODEL} \
-    && cp ./ORYZA3.exe ./${MODELS_ORYZA_MODEL}/ \
-    && chmod +x ${MODELS_DIR}/oryza \
-    && mv ./ORYZAv3_lin.zip ${MODELS_TMP}/ \
-    && mv ./ORYZAv3_win.zip ${MODELS_TMP}/ \
+    #&& cp ./ORYZA3.exe ./${MODELS_ORYZA_MODEL}/ \
+    #&& chmod +x ${MODELS_DIR}/oryza \
+    #&& mv ./ORYZAv3_lin.zip ${MODELS_TMP}/ \
+    #&& mv ./ORYZAv3_win.zip ${MODELS_TMP}/ \
     # DSSAT
-    && cd ${MODELS_DIR} \ 
+RUN cd ${MODELS_DIR} \ 
     && git clone ${MODELS_DSSAT_GITHUB_URL} \
     && cd ${MODELS_DIR}/${MODELS_DSSAT_GITHUB} \
     && mkdir build \
