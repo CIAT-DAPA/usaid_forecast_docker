@@ -107,7 +107,7 @@ RUN cd ${MODELS_DIR} \
     && rm ${SCRIPTS_NAME}.zip \
     && Rscript ${MODELS_DIR}/imports.R \
     && mv ${MODELS_DIR}/imports.R ${MODELS_TMP}/ \
-    && mv ${MODELS_DIR}/pkgs.rds ${MODELS_TMP}/ 
+    && mv ${MODELS_DIR}/pkgs.rds ${MODELS_TMP}/
 
 
 # docker build -t stevensotelo/aclimate_process:latest .
