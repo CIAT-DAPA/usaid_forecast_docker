@@ -28,8 +28,8 @@ ENV SCRIPTS_NAME=usaid_procesos_interfaz
 ENV SCRIPTS_CODE=https://github.com/CIAT-DAPA/usaid_procesos_interfaz/releases/download/v${SCRIPTS_VERSION}/${SCRIPTS_NAME}.zip
 ENV PATH="${MODELS_DIR}:${PATH}"
 ENV PATH="${CPT_BIN_DIR}:${PATH}"
-ENV N_CORES=2
 ENV CONDA_ENV_PYCPT=envpycpt
+ENV PATH /root/anaconda3/bin:$PATH
 
 # Install dependencies
 # Climate analysis tools: libnetcdf-dev libgrib-api-dev grads cdo nco
@@ -68,10 +68,8 @@ RUN apt-get update \
     libxml2-dev \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir ${MODELS_WORKDIR} \
-    && mkdir ${MODELS_TMP}
-
-# Downloading and installing Anaconda
-RUN apt-get update \
+    && mkdir ${MODELS_TMP} \
+    # Downloading and installing Anaconda
     && wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh \
     && mkdir ~/Anaconda3-2021.11 \
     && mv Anaconda3-2021.11-Linux-x86_64.sh ~/Anaconda3-2021.11 \
@@ -80,19 +78,18 @@ RUN apt-get update \
     && bash Anaconda3-2021.11-Linux-x86_64.sh -b && \
     echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc && \
     /bin/bash -c "source ~/.bashrc" \
-    && rm Anaconda3-2021.11-Linux-x86_64.sh
-ENV PATH /root/anaconda3/bin:$PATH
+    && rm Anaconda3-2021.11-Linux-x86_64.sh \
+    # Installing Anaconda dependencies on a conda enviroment
+    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy
 
-# Installing Anaconda dependencies and models
-RUN printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy \
-    # # Oryza
-    # RUN cd ${MODELS_DIR} \
-    #     && unzip ./ORYZAv3_lin.zip \
-    #     && mv ./Linux ./${MODELS_ORYZA_MODEL} \
-    #     && chmod +x ${MODELS_DIR}/oryza \
-    #     && mv ./ORYZAv3_lin.zip ${MODELS_TMP}/ \
-    # DSSAT
-    && cd ${MODELS_DIR} \ 
+# # Oryza
+# RUN cd ${MODELS_DIR} \
+#     && unzip ./ORYZAv3_lin.zip \
+#     && mv ./Linux ./${MODELS_ORYZA_MODEL} \
+#     && chmod +x ${MODELS_DIR}/oryza \
+#     && mv ./ORYZAv3_lin.zip ${MODELS_TMP}/ \
+# DSSAT
+RUN cd ${MODELS_DIR} \ 
     && git clone ${MODELS_DSSAT_GITHUB_URL} \
     && cd ${MODELS_DIR}/${MODELS_DSSAT_GITHUB} \
     && mkdir build \
