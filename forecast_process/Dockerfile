@@ -51,13 +51,6 @@ RUN apt-get update \
     grads \
     cdo \
     nco \
-    && wget https://download.visualstudio.microsoft.com/download/pr/647f8505-3bf0-48c5-ac0f-3839be6816d7/d0c2762ded5a1ded3c79b1e495e43b7c/dotnet-sdk-2.2.203-linux-x64.tar.gz \
-    && mkdir ~/dotnet-2.2-203 \
-    && tar -xvf dotnet-sdk-2.2.203-linux-x64.tar.gz -C ~/dotnet-2.2-203 \
-    && ln -s ~/dotnet-2.2-203/dotnet /usr/bin/dotnet \
-    && rm dotnet-sdk-2.2.203-linux-x64.tar.gz \
-    && apt-get update \
-    && apt-get install -y \
     r-base \
     gdal-bin \
     proj-bin \
@@ -66,6 +59,21 @@ RUN apt-get update \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
+    && wget https://download.visualstudio.microsoft.com/download/pr/647f8505-3bf0-48c5-ac0f-3839be6816d7/d0c2762ded5a1ded3c79b1e495e43b7c/dotnet-sdk-2.2.203-linux-x64.tar.gz \
+    && mkdir ~/dotnet-2.2-203 \
+    && tar -xvf dotnet-sdk-2.2.203-linux-x64.tar.gz -C ~/dotnet-2.2-203 \
+    && ln -s ~/dotnet-2.2-203/dotnet /usr/bin/dotnet \
+    && rm dotnet-sdk-2.2.203-linux-x64.tar.gz \
+#    && apt-get update \
+#    && apt-get install -y \
+#    r-base \
+#    gdal-bin \
+#    proj-bin \
+#    libgdal-dev \
+#    libproj-dev \
+#    libcurl4-openssl-dev \
+#    libssl-dev \
+#    libxml2-dev \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir ${MODELS_WORKDIR} \
     && mkdir ${MODELS_TMP} \
@@ -75,10 +83,10 @@ RUN apt-get update \
     && mv Anaconda3-2021.11-Linux-x86_64.sh ~/Anaconda3-2021.11 \
     && cd ~/Anaconda3-2021.11 \
     && chmod +x Anaconda3-2021.11-Linux-x86_64.sh \
-    && bash Anaconda3-2021.11-Linux-x86_64.sh -b && \
-    cp ${MODELS_DIR}/conda_config.txt ~/.bashrc && \
-    echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc && \
-    /bin/bash -c "source ~/.bashrc" \
+    && bash Anaconda3-2021.11-Linux-x86_64.sh -b \
+    && cp ${MODELS_DIR}/.bashrc ~/.bashrc \
+    && echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc  \
+    && /bin/bash -c "source ~/.bashrc" \
     && rm Anaconda3-2021.11-Linux-x86_64.sh \
     # Installing Anaconda dependencies on a conda enviroment
     && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn

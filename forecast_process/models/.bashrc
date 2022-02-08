@@ -11,4 +11,4 @@ export PATH="/root/anaconda3/bin:$PATH"
 fi
 fi
 # unset __conda_setup
-# <<< conda initialize <<<
+# <<< conda initialize <<<export PATH=/root/anaconda3/bin:/root/anaconda3/bin:/forecast/models/CPT/17.6.1/bin:/forecast/models:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
