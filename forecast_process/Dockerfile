@@ -64,16 +64,16 @@ RUN apt-get update \
     && tar -xvf dotnet-sdk-2.2.203-linux-x64.tar.gz -C ~/dotnet-2.2-203 \
     && ln -s ~/dotnet-2.2-203/dotnet /usr/bin/dotnet \
     && rm dotnet-sdk-2.2.203-linux-x64.tar.gz \
-#    && apt-get update \
-#    && apt-get install -y \
-#    r-base \
-#    gdal-bin \
-#    proj-bin \
-#    libgdal-dev \
-#    libproj-dev \
-#    libcurl4-openssl-dev \
-#    libssl-dev \
-#    libxml2-dev \
+    #    && apt-get update \
+    #    && apt-get install -y \
+    #    r-base \
+    #    gdal-bin \
+    #    proj-bin \
+    #    libgdal-dev \
+    #    libproj-dev \
+    #    libcurl4-openssl-dev \
+    #    libssl-dev \
+    #    libxml2-dev \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir ${MODELS_WORKDIR} \
     && mkdir ${MODELS_TMP} \
@@ -84,7 +84,7 @@ RUN apt-get update \
     && cd ~/Anaconda3-2021.11 \
     && chmod +x Anaconda3-2021.11-Linux-x86_64.sh \
     && bash Anaconda3-2021.11-Linux-x86_64.sh -b \
-    && cp ${MODELS_DIR}/.bashrc ~/.bashrc \
+    && cp ${MODELS_DIR}/conda_config.txt ~/.bashrc \
     && echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc  \
     && /bin/bash -c "source ~/.bashrc" \
     && rm Anaconda3-2021.11-Linux-x86_64.sh \
