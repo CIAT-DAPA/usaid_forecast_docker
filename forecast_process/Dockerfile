@@ -33,7 +33,8 @@ ENV PATH /root/anaconda3/bin:$PATH
 
 # Install dependencies
 # Climate analysis tools: libnetcdf-dev libgrib-api-dev grads cdo nco
-RUN apt-get update \
+RUN apt-get clean \
+    && apt-get update \
     && apt-get install -y \
     make \
     gcc \ 
@@ -64,16 +65,6 @@ RUN apt-get update \
     && tar -xvf dotnet-sdk-2.2.203-linux-x64.tar.gz -C ~/dotnet-2.2-203 \
     && ln -s ~/dotnet-2.2-203/dotnet /usr/bin/dotnet \
     && rm dotnet-sdk-2.2.203-linux-x64.tar.gz \
-    #    && apt-get update \
-    #    && apt-get install -y \
-    #    r-base \
-    #    gdal-bin \
-    #    proj-bin \
-    #    libgdal-dev \
-    #    libproj-dev \
-    #    libcurl4-openssl-dev \
-    #    libssl-dev \
-    #    libxml2-dev \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir ${MODELS_WORKDIR} \
     && mkdir ${MODELS_TMP} \
@@ -83,12 +74,13 @@ RUN apt-get update \
     && mv Anaconda3-2021.11-Linux-x86_64.sh ~/Anaconda3-2021.11 \
     && cd ~/Anaconda3-2021.11 \
     && chmod +x Anaconda3-2021.11-Linux-x86_64.sh \
-    && bash Anaconda3-2021.11-Linux-x86_64.sh -b \
-    && cp ${MODELS_DIR}/conda_config.txt ~/.bashrc \
-    && echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc  \
+    && bash Anaconda3-2021.11-Linux-x86_64.sh -b
+
+RUN  cp ${MODELS_DIR}/.bashrc ~/.bashrc \
+#    && echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc  \
     && /bin/bash -c "source ~/.bashrc" \
-    && rm Anaconda3-2021.11-Linux-x86_64.sh \
-    # Installing Anaconda dependencies on a conda enviroment
+#    && rm Anaconda3-2021.11-Linux-x86_64.sh \
+    #Installing Anaconda dependencies on a conda enviroment
     && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn
 
 # # Oryza
@@ -148,5 +140,5 @@ RUN cd ${MODELS_DIR} \
 # docker tag 0a1002a8a03d stevensotelo/aclimate_process:2.0
 
 # docker run -it --rm -v D:/CIAT/Code/USAID/usaid_forecast_docker/forecast_process/workdir:/forecast/workdir stevensotelo/aclimate_process:latest /bin/bash 
-# docker run -it --rm -e N_CORES=2 -v D:/CIAT/Code/USAID/usaid_forecast_docker/forecast_process/workdir:/forecast/workdir stevensotelo/aclimate_process:latest /bin/bash
+# docker run -it --rm -e N_CORES=2 -v D:/CIAT/Code/USAID/usaid_forecast_docker/forecast_process/workdir:/forecast/workdir stevensotelo/aclimate_process:2.0 /bin/bash
 # docker run -it --rm -e N_CORES=5 --cpus="5" --mount type=bind,source=/opt/aclimate/1.Data/forecast/202110,destination=/forecast/workdir stevensotelo/aclimate_process:latest /bin/bash
