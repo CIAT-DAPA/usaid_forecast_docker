@@ -76,12 +76,14 @@ RUN apt-get clean \
     && chmod +x Anaconda3-2021.11-Linux-x86_64.sh \
     && bash Anaconda3-2021.11-Linux-x86_64.sh -b
 
-RUN  cp ${MODELS_DIR}/.bashrc ~/.bashrc \
-#    && echo "export PATH="/root/anaconda3/bin:$PATH"" >> ~/.bashrc  \
+RUN cp ${MODELS_DIR}/.bashrc ~/.bashrc \
     && /bin/bash -c "source ~/.bashrc" \
-#    && rm Anaconda3-2021.11-Linux-x86_64.sh \
-    #Installing Anaconda dependencies on a conda enviroment
-    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn
+    #Installing Anaconda and Python dependencies on a conda enviroment
+    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn  \
+    && git clone git@github.com:dimitri-justeau/gsconfig-py3.git \ 
+    && cd gsconfig-py3 \ 
+    && python setup.py install  \
+    && pip install rasterio geopandas
 
 # # Oryza
 # RUN cd ${MODELS_DIR} \
