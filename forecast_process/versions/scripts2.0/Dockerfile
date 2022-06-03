@@ -1,17 +1,15 @@
-FROM debian:buster
+FROM stevensotelo/aclimate_process:scripts1.9
 
 LABEL maintainer="stevenbetancurt@hotmail.com"
 
 WORKDIR /forecast
 
 COPY ./models /forecast/models
-COPY ./test /forecast/test
+# COPY ./forecast_process/test /forecast/test
 
 ENV MODELS_DIR=/forecast/models
 ENV MODELS_TMP=/forecast/tmp
 ENV MODELS_WORKDIR=/forecast/workdir
-#ENV MODELS_ORYZA_MODEL=oryza_model
-#ENV MODELS_ORYZA_DIR=${MODELS_DIR}/${MODELS_ORYZA_MODEL}
 ENV MODELS_DSSAT_MODEL=dssat-csm
 ENV MODELS_DSSAT_GITHUB=dssat-csm-os
 ENV MODELS_DSSAT_GITHUB_URL=https://github.com/DSSAT/dssat-csm-os
@@ -36,76 +34,28 @@ ENV PATH /root/anaconda3/bin:$PATH
 RUN apt-get clean \
     && apt-get update \
     && apt-get install -y \
-    make \
-    gcc \ 
-    vim \
-    unzip \
-    dirmngr \
-    software-properties-common \
-    apt-transport-https \
-    cmake \
-    gfortran \
-    git \
-    wget \
     libnetcdf-dev \
     libgrib-api-dev \
     grads \
     cdo \
-    nco \
-    r-base \
-    gdal-bin \
-    proj-bin \
-    libgdal-dev \
-    libproj-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libxml2-dev \
-    && wget https://download.visualstudio.microsoft.com/download/pr/647f8505-3bf0-48c5-ac0f-3839be6816d7/d0c2762ded5a1ded3c79b1e495e43b7c/dotnet-sdk-2.2.203-linux-x64.tar.gz \
-    && mkdir ~/dotnet-2.2-203 \
-    && tar -xvf dotnet-sdk-2.2.203-linux-x64.tar.gz -C ~/dotnet-2.2-203 \
-    && ln -s ~/dotnet-2.2-203/dotnet /usr/bin/dotnet \
-    && rm dotnet-sdk-2.2.203-linux-x64.tar.gz \
-    && rm -rf /var/lib/apt/lists/* \
-    && mkdir ${MODELS_WORKDIR} \
-    && mkdir ${MODELS_TMP} \
-    # Downloading and installing Anaconda
-    && wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh \
+    nco
+
+RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh \
     && mkdir ~/Anaconda3-2021.11 \
     && mv Anaconda3-2021.11-Linux-x86_64.sh ~/Anaconda3-2021.11 \
     && cd ~/Anaconda3-2021.11 \
     && chmod +x Anaconda3-2021.11-Linux-x86_64.sh \
-    && bash Anaconda3-2021.11-Linux-x86_64.sh -b
-
-RUN cp ${MODELS_DIR}/.bashrc ~/.bashrc \
+    && bash Anaconda3-2021.11-Linux-x86_64.sh -b \
+    && cp ${MODELS_DIR}/.bashrc ~/.bashrc \
     && /bin/bash -c "source ~/.bashrc" \
     #Installing Anaconda and Python dependencies on a conda enviroment
     && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn  \
+    && /bin/bash -c "source ~/anaconda3/etc/profile.d/conda.sh" \
+    #&& conda activate envpycpt \
     && git clone https://github.com/dimitri-justeau/gsconfig-py3.git \ 
     && cd gsconfig-py3/ \ 
     && printf "y" | python setup.py install  \
-    && printf "y" | pip install rasterio geopandas
-
-# # Oryza
-# RUN cd ${MODELS_DIR} \
-#     && unzip ./ORYZAv3_lin.zip \
-#     && mv ./Linux ./${MODELS_ORYZA_MODEL} \
-#     && chmod +x ${MODELS_DIR}/oryza \
-#     && mv ./ORYZAv3_lin.zip ${MODELS_TMP}/ \
-# DSSAT
-RUN cd ${MODELS_DIR} \ 
-    && git clone ${MODELS_DSSAT_GITHUB_URL} \
-    && cd ${MODELS_DIR}/${MODELS_DSSAT_GITHUB} \
-    && mkdir build \
-    && cd build \
-    && cmake .. \ 
-    && make \
-    && mkdir ${MODELS_DSSAT_DIR} \
-    && mv ./bin/dscsm047 ${MODELS_DSSAT_DIR}/dscsm047 \
-    && cp -r ../Data/. ${MODELS_DSSAT_DIR}/ \
-    && mv ${MODELS_DIR}/DSSATPRO.L47 ${MODELS_DSSAT_DIR}/DSSATPRO.L47 \
-    && chmod +x ${MODELS_DSSAT_DIR}/dscsm047 \
-    && cd ${MODELS_DIR} \
-    && mv ${MODELS_DIR}/${MODELS_DSSAT_GITHUB} ${MODELS_TMP}/${MODELS_DSSAT_GITHUB} \
+    && printf "y" | pip install rasterio geopandas \
     # CPT and PyCPT scripts
     && cd ${MODELS_DIR} \ 
     && mkdir -p /${MODELS_CPT_MODEL}/${MODELS_CPT_VERSION} \
@@ -120,7 +70,8 @@ RUN cd ${MODELS_DIR} \
     && cd ${PYCPT_SCRIPTS_DIR} \
     && git clone https://bitbucket.org/py-iri/iri-pycpt.git \
     # Scripts usaid_procesos_interfaz
-    && mkdir ${SCRIPTS_DIR} \    
+    && rm -r ${SCRIPTS_DIR} \
+    && mkdir ${SCRIPTS_DIR} \        
     && cd ${SCRIPTS_DIR} \ 
     && wget ${SCRIPTS_CODE} \
     && unzip ${SCRIPTS_NAME}.zip \
