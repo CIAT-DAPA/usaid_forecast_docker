@@ -49,11 +49,12 @@ RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh \
     && cp ${MODELS_DIR}/.bashrc ~/.bashrc \
     && /bin/bash -c "source ~/.bashrc" \
     #Installing Anaconda and Python dependencies on a conda enviroment
-    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn  \
-    && /bin/bash -c "source ~/anaconda3/etc/profile.d/conda.sh" \
-    #&& conda activate envpycpt \
-    && git clone https://github.com/dimitri-justeau/gsconfig-py3.git \ 
-    && cd gsconfig-py3/ \ 
+    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn
+
+#Activating conda env and installing python dependencies
+SHELL ["conda", "run", "-n", "envpycpt", "/bin/bash", "-c"]
+RUN git clone https://github.com/dimitri-justeau/gsconfig-py3.git \ 
+    && cd gsconfig-py3/ \
     && printf "y" | python setup.py install  \
     && printf "y" | pip install rasterio geopandas \
     # CPT and PyCPT scripts
