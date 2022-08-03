@@ -49,7 +49,23 @@ RUN wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh \
     && cp ${MODELS_DIR}/.bashrc ~/.bashrc \
     && /bin/bash -c "source ~/.bashrc" \
     #Installing Anaconda and Python dependencies on a conda enviroment
-    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn
+    && printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn \
+    # DSSAT v4.8
+    && rm -R ${MODELS_DIR}/dssat ${MODELS_DIR}/${MODELS_DSSAT_MODEL} \
+    && cd ${MODELS_DIR} \ 
+    && git clone ${MODELS_DSSAT_GITHUB_URL} \
+    && cd ${MODELS_DIR}/${MODELS_DSSAT_GITHUB} \
+    && mkdir build \
+    && cd build \
+    && cmake .. \ 
+    && make \
+    && mkdir ${MODELS_DSSAT_DIR} \
+    && mv ./bin/dscsm048 ${MODELS_DSSAT_DIR}/dscsm048 \
+    && cp -r ../Data/. ${MODELS_DSSAT_DIR}/ \
+    && mv ${MODELS_DIR}/DSSATPRO.L48 ${MODELS_DSSAT_DIR}/DSSATPRO.L48 \
+    && chmod +x ${MODELS_DSSAT_DIR}/dscsm048 \
+    && cd ${MODELS_DIR} \
+    && mv ${MODELS_DIR}/${MODELS_DSSAT_GITHUB} ${MODELS_TMP}/${MODELS_DSSAT_GITHUB}
 
 #Activating conda env and installing python dependencies
 SHELL ["conda", "run", "-n", "envpycpt", "/bin/bash", "-c"]
