@@ -22,12 +22,13 @@ USER root
 RUN apt-get clean \
     && apt-get update \
     && apt-get install -y \
+        liblapack-dev \
         libnetcdf-dev \
         grads \
         cdo \
         nco \
         make \
-        gcc \ 
+        gcc \
         vim \
         unzip \
         dirmngr \
@@ -36,15 +37,9 @@ RUN apt-get clean \
         cmake \
         gfortran \
         git \
-        wget 
+        wget
 
-RUN printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn rasterio geopandas \
-    && fix-permissions "${CONDA_DIR}" \
-    && fix-permissions "/home/${NB_USER}" \
-    && echo "conda activate ${CONDA_ENV_PYCPT}" >> "${HOME}/.bashrc" \
-    && /bin/bash -c "source ${HOME}/.bashrc"
-
-RUN cd ${MODELS_DIR} \ 
+RUN cd ${MODELS_DIR} \
     && mkdir -p /${MODELS_CPT_MODEL}/${MODELS_CPT_VERSION} \
     && tar xzvf ${MODELS_CPT_SOURCE} \
     && cd ${MODELS_CPT_DIR}/${MODELS_CPT_VERSION} \
@@ -54,8 +49,17 @@ RUN cd ${MODELS_DIR} \
     && cd ${MODELS_DIR} \
     && mkdir ${PYCPT_SCRIPTS_DIR} \
     && cd ${PYCPT_SCRIPTS_DIR} \
-    && git clone https://bitbucket.org/py-iri/iri-pycpt.git
-    
+    && git clone https://bitbucket.org/py-iri/iri-pycpt.git \
+    && chmod -R 0777 ${MODELS_DIR}
+
+USER ${NB_UID}
+
+RUN printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4 numpy scikit-learn rasterio geopandas ipython ipykernel \
+    && "${CONDA_DIR}/envs/${CONDA_ENV_PYCPT}/bin/python" -m ipykernel install --user --name="${CONDA_ENV_PYCPT}" \
+    && fix-permissions "${CONDA_DIR}" \
+    && fix-permissions "/home/${NB_USER}" \
+    && echo "conda activate ${CONDA_ENV_PYCPT}" >> "${HOME}/.bashrc" \
+    && /bin/bash -c "source ${HOME}/.bashrc"
 
 
 
