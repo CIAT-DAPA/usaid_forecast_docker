@@ -1,10 +1,10 @@
 FROM jupyter/datascience-notebook
 
-WORKDIR /workdir
+WORKDIR /home/jovyan
 
-COPY ./installers /workdir/models
+COPY ./installers /home/jovyan/models
 
-ENV MODELS_DIR=/workdir/models
+ENV MODELS_DIR=/home/jovyan/models
 ENV MODELS_CPT_MODEL=CPT
 ENV MODELS_CPT_VERSION=17.6.1
 ENV MODELS_CPT_SOURCE=${MODELS_CPT_MODEL}.${MODELS_CPT_VERSION}.tar.gz
@@ -49,8 +49,7 @@ RUN cd ${MODELS_DIR} \
     && cd ${MODELS_DIR} \
     && mkdir ${PYCPT_SCRIPTS_DIR} \
     && cd ${PYCPT_SCRIPTS_DIR} \
-    && git clone https://bitbucket.org/py-iri/iri-pycpt.git \
-    && chmod -R 0777 ${MODELS_DIR}
+    && git clone https://bitbucket.org/py-iri/iri-pycpt.git
 
 USER ${NB_UID}
 
@@ -60,6 +59,9 @@ RUN printf "y" | conda create -n ${CONDA_ENV_PYCPT} xarray scipy cartopy netcdf4
     && fix-permissions "/home/${NB_USER}" \
     && echo "conda activate ${CONDA_ENV_PYCPT}" >> "${HOME}/.bashrc" \
     && /bin/bash -c "source ${HOME}/.bashrc"
+
+USER root
+RUN chown -R ${NB_USER} /home/jovyan
 
 
 
