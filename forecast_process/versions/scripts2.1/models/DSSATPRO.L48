@@ -1,0 +1,167 @@
+*** *  DSSAT PROFILE LINUX* ***
+DDB // /forecast/models/dssat-csm
+DTB // /forecast/models/dssat-csm
+DTE // /forecast/models/dssat-csm
+DTO // /forecast/models/dssat-csm
+DAT // /forecast/models/dssat-csm
+DPT // /forecast/models/dssat-csm
+DIM // /forecast/models/dssat-csm
+DTP // /forecast/models/dssat-csm
+DPF // /forecast/models/dssat-csm
+DFO // /forecast/models/dssat-csm
+DIS // /forecast/models/dssat-csm
+DDW // /forecast/models/dssat-csm
+DWG // /forecast/models/dssat-csm
+DWC // /forecast/models/dssat-csm
+DDS // /forecast/models/dssat-csm
+DTS // /forecast/models/dssat-csm
+DDG // /forecast/models/dssat-csm
+DCG // /forecast/models/dssat-csm/TOOLS/GENCALC GENCALC2.EXE
+DGL // /forecast/models/dssat-csm/TOOLS/GLUE GLUE.BAT
+DPM // /forecast/models/dssat-csm
+DDE // /forecast/models/dssat-csm
+TOG // /forecast/models/dssat-csm/TOOLS/GBUILD GBUILD.EXE
+
+MAL // /forecast/models/dssat-csm dscsm048 PRFRM048
+MBA // /forecast/models/dssat-csm dscsm048 CSCER048
+MBH // /forecast/models/dssat-csm dscsm048 CRGRO048
+MBM // /forecast/models/dssat-csm dscsm048 PRFRM048
+MBN // /forecast/models/dssat-csm dscsm048 CRGRO048
+MBR // /forecast/models/dssat-csm dscsm048 PRFRM048
+MBS // /forecast/models/dssat-csm dscsm048 BSCER048
+MCB // /forecast/models/dssat-csm dscsm048 CRGRO048
+MCH // /forecast/models/dssat-csm dscsm048 CRGRO048
+MCT // /forecast/models/dssat-csm
+MCN // /forecast/models/dssat-csm dscsm048 CRGRO048
+MCI // /forecast/models/dssat-csm dscsm048 CRGRO048
+MCO // /forecast/models/dssat-csm dscsm048 CRGRO048
+MCP // /forecast/models/dssat-csm dscsm048 CRGRO048
+MCS // /forecast/models/dssat-csm dscsm048 CSYCA048
+MCV // /forecast/models/dssat-csm
+MFA // /forecast/models/dssat-csm dscsm048 CRGRO048
+MFB // /forecast/models/dssat-csm dscsm048 CRGRO048
+MGB // /forecast/models/dssat-csm dscsm048 CRGRO048
+MGW // /forecast/models/dssat-csm
+MLT // /forecast/models/dssat-csm dscsm048 CRGRO048
+MML // /forecast/models/dssat-csm dscsm048 MLCER048
+MMZ // /forecast/models/dssat-csm dscsm048 MZCER048
+MNN // /forecast/models/dssat-csm
+MNP // /forecast/models/dssat-csm dscsm048 CRGRO048
+MPE // /forecast/models/dssat-csm dscsm048 CRGRO048
+MPI // /forecast/models/dssat-csm dscsm048 PIALO048
+MPN // /forecast/models/dssat-csm dscsm048 CRGRO048
+MPO // /forecast/models/dssat-csm dscsm048 PRFRM048
+MPP // /forecast/models/dssat-csm dscsm048 CRGRO048
+MPR // /forecast/models/dssat-csm dscsm048 CRGRO048
+MPT // /forecast/models/dssat-csm dscsm048 PTSUB048
+MQU // /forecast/models/dssat-csm dscsm048 CRGRO048
+MRI // /forecast/models/dssat-csm dscsm048 RICER048
+MRP // /forecast/models/dssat-csm
+MSB // /forecast/models/dssat-csm dscsm048 CRGRO048
+MSC // /forecast/models/dssat-csm dscsm048 SCCAN048
+MSF // /forecast/models/dssat-csm dscsm048 CRGRO048
+MSG // /forecast/models/dssat-csm dscsm048 SGCER048
+MSI // /forecast/models/dssat-csm
+MSS // /forecast/models/dssat-csm dscsm048 CRGRO048
+MSU // /forecast/models/dssat-csm dscsm048 CRGRO048
+MSW // /forecast/models/dssat-csm dscsm048 SWCER048
+MTF // /forecast/models/dssat-csm dscsm048 TFAPS048
+MTM // /forecast/models/dssat-csm dscsm048 CRGRO048
+MTN // /forecast/models/dssat-csm dscsm048 TNARO048
+MTR // /forecast/models/dssat-csm dscsm048 TRARO048
+MVB // /forecast/models/dssat-csm dscsm048 CRGRO048
+MWH // /forecast/models/dssat-csm dscsm048 CSCER048
+MOT // /forecast/models/dssat-csm
+MU1 // /forecast/models/dssat-csm
+MU2 // /forecast/models/dssat-csm
+MIO // /forecast/models/dssat-csm
+MLO // /forecast/models/dssat-csm
+
+MGR // /forecast/models/dssat-csm
+NSH // /forecast/models/dssat-csm
+ASP // /forecast/models/dssat-csm
+ASS // /forecast/models/dssat-csm dscsm048
+ASA // /forecast/models/dssat-csm VARAN2.EXE
+AGR // /forecast/models/dssat-csm
+AQS // /forecast/models/dssat-csm dscsm048
+AQA // /forecast/models/dssat-csm SUSTAIN2.EXE
+ASX // /forecast/models/dssat-csm
+APS // /forecast/models/dssat-csm dscsm048
+APV // /forecast/models/dssat-csm
+APM // /forecast/models/dssat-csm
+APA // /forecast/models/dssat-csm VARAN2.EXE
+APJ // /forecast/models/dssat-csm
+APF // /forecast/models/dssat-csm
+APP // /forecast/models/dssat-csm
+APK // /forecast/models/dssat-csm DISC9801.EXE
+TOE // /WINDOWS NOTEPAD.EXE
+TOS // /
+TOM // /
+STD // /forecast/models/dssat-csm/StandardData
+CDD // /forecast/models/dssat-csm
+WED // /forecast/models/dssat-csm/Weather
+WGD // /forecast/models/dssat-csm/Weather/Gen
+CLD // /forecast/models/dssat-csm/Weather/Climate
+WMD // /forecast/models/dssat-csm/Weather/Month
+SLD // /forecast/models/dssat-csm/Soil
+CRD // /forecast/models/dssat-csm/Genotype
+FID // /forecast/models/dssat-csm/Background
+ALD // /forecast/models/dssat-csm/Alfalfa
+GCD // /forecast/models/dssat-csm/GCWork
+GUD // /forecast/models/dssat-csm/GLWork
+BAD // /forecast/models/dssat-csm/Barley
+BHD // /forecast/models/dssat-csm/Bahia
+BMD // /forecast/models/dssat-csm/Bermudagrass
+BND // /forecast/models/dssat-csm/Drybean
+BRD // /forecast/models/dssat-csm/Brachiaria
+BSD // /forecast/models/dssat-csm/Sugarbeet
+CBD // /forecast/models/dssat-csm/Cabbage
+CHD // /forecast/models/dssat-csm/Chickpea
+CID // /forecast/models/dssat-csm/Chia
+CTD // /forecast/models/dssat-csm/Citrus
+CND // /forecast/models/dssat-csm/Canola
+COD // /forecast/models/dssat-csm/Cotton
+CPD // /forecast/models/dssat-csm/Cowpea
+CSD // /forecast/models/dssat-csm/Cassava
+CVD // /forecast/models/dssat-csm/Clover
+FAD // /forecast/models/dssat-csm/Fallow
+FBD // /forecast/models/dssat-csm/Fababean
+GBD // /forecast/models/dssat-csm/GreenBean
+LTD // /forecast/models/dssat-csm/Lentil
+MLD // /forecast/models/dssat-csm/Millet
+MZD // /forecast/models/dssat-csm/Maize
+NND // /forecast/models/dssat-csm/Banana
+NPD // /forecast/models/dssat-csm/Napier
+PED // /forecast/models/dssat-csm/Pea
+PID // /forecast/models/dssat-csm/Pineapple
+PND // /forecast/models/dssat-csm/Peanut
+POD // /forecast/models/dssat-csm/PerennialPeanut
+PPD // /forecast/models/dssat-csm/Pigeonpea
+PRD // /forecast/models/dssat-csm/Pepper
+PTD // /forecast/models/dssat-csm/Potato
+QUD // /forecast/models/dssat-csm/Quinoa
+RID // /forecast/models/dssat-csm/Rice
+RPD // /forecast/models/dssat-csm/Rhizomapeanut
+SBD // /forecast/models/dssat-csm/Soybean
+SCD // /forecast/models/dssat-csm/Sugarcane
+SFD // /forecast/models/dssat-csm/Safflower
+SGD // /forecast/models/dssat-csm/Sorghum
+SSD // /forecast/models/dssat-csm/Sesame
+SID // /forecast/models/dssat-csm
+SUD // /forecast/models/dssat-csm/Sunflower
+SWD // /forecast/models/dssat-csm/SweetCorn
+TFD // /forecast/models/dssat-csm/Teff
+TMD // /forecast/models/dssat-csm/Tomato
+TND // /forecast/models/dssat-csm/Tanier
+TRD // /forecast/models/dssat-csm/Taro
+VBD // /forecast/models/dssat-csm/Velvetbean
+WHD // /forecast/models/dssat-csm/Wheat
+U1D // /forecast/models/dssat-csm/CROP1
+U2D // /forecast/models/dssat-csm/CROP2
+OTD // /
+ASD // /forecast/models/dssat-csm/Seasonal
+AQD // /forecast/models/dssat-csm/Sequence
+APD // /forecast/models/dssat-csm/Spatial
+PSD // /forecast/models/dssat-csm/Pest
+ECD // /forecast/models/dssat-csm/Economic
+TOD // /

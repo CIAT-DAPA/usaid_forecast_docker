@@ -1,0 +1,8 @@
+pkgs <- readRDS("/forecast/models/pkgs.rds")
+#install.packages(rownames(pkgs))
+install.packages("ncdf4")
+install.packages("doParallel")
+install.packages("tictoc")
+install.packages("remotes")
+library("remotes")
+install_github("agrdatasci/ag5Tools", build_vignettes = TRUE, build = FALSE)
